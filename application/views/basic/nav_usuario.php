@@ -13,14 +13,14 @@
           <ul class="nav navbar-nav">
             <li class="active"><a href="/encar/index.php/encar">Inicio</a></li>
             <li><a href="/encar/index.php/encar">Acerca de</a></li>
-            <li><a href="http://getbootstrap.com/examples/starter-template/#contact">Contacto</a></li>                               
+            <li><a href="http://getbootstrap.com/examples/starter-template/#contact">Contacto</a></li> 
+            <li><a href="/encar/index.php/encar">Reservas</a></li>                                        
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
-              <a href="http://getbootstrap.com/examples/starter-template/#contact" class="dropdown-toggle" data-toggle="dropdown">Ingresar<span class="caret"></span></a>
+              <a href="http://getbootstrap.com/examples/starter-template/#contact" class="dropdown-toggle" data-toggle="dropdown"><?php if (isset($usuario)) {echo $usuario;} ?><span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><a href="/encar/index.php/encar/loginvista">Iniciar sesion</a></li>
-                <li><a href="/encar/index.php/encar/registrar_usuariovista">Registrarse</a></li>                
+                <li><a href="/encar/index.php/encar/logout">Cerrar sesion</a></li>               
               </ul>
             </li>                   
           </ul>          

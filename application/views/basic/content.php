@@ -1,8 +1,9 @@
     <div class="container">
-
-      <div class="starter-template">
-        <h1>Encar</h1>
-        <p class="lead">La nueva forma de moverse</p>
-      </div>
-
+    	<div class="row">
+    		<div class="col-md-12">
+		    	<div class="page-header">
+		        	<h1>Encar <small>La nueva forma de moverse</small></h1>
+		      	</div>
+    		</div>
+    	</div>	
     </div>
