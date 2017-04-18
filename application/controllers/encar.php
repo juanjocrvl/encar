@@ -298,8 +298,16 @@
 				$dat['titulo'] = 'Error';
 				$dat['errores'] = $errores;
 				$this->load->vars($dat);
+				$head['errores'] = $errores;			
+				$this->load->helper('url');
+				$this->load->view('basic/header',$head);
+				$this->barra_nav();
+				$this->load->view('basic/content');	
 				$this->load->view('encar/error');
-				$this->load->view('templates/footer');	
+				$this->load->view('encar/login');							
+				$this->load->view('basic/footer');
+
+
 
 			}elseif (is_bool($this->Usuario->validar_login($usuario,$pass)) && $this->Usuario->validar_login($usuario,$pass)== TRUE) {
 
@@ -359,12 +367,18 @@
 
 				}else{
 
-					$errores[] = 'Usuario no exite';
-					$dat['titulo'] = 'Error';
-					$dat['errores'] = $errores;
-					$this->load->vars($dat);
-					$this->load->view('encar/error');
-					$this->load->view('templates/footer');
+				$errores[] = 'El usuario no existe en nuestra base de datos';
+				$head['errores'] = $errores;			
+				$this->load->helper('url');
+				$this->load->view('basic/header',$head);
+				$this->barra_nav();
+				$this->load->view('basic/content');	
+				$this->load->view('encar/error');
+				$this->load->view('encar/login');							
+				$this->load->view('basic/footer');
+		
+
+
 
 				}
 
