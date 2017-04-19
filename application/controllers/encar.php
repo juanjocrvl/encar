@@ -168,7 +168,7 @@
 
 				$usuarioadminsede->registrar();
 			
-				$head['success'] = 'Administrador registrado correctamente';	
+				$head['success'] = 'Administrador de sede registrado correctamente';	
 				$head['link'] = '/encar/index.php/encar/registrar_adminsedevista';	
 				$head['boton'] = 'administrador';	
 
@@ -288,7 +288,7 @@
 			$this->load->library('session');
 
 			$usuario = $this->input->post('nombreUsuario');
-			$pass = $this->input->post('contrasena');	
+			$pass =  $this->input->post('contrasena');	
 
 			$this->load->model('Usuario');
 
@@ -367,6 +367,35 @@
 
 				}else{
 
+					$this->load->model('Administrador');
+
+				if (is_bool($this->Administrador->validar_login($usuario,$pass)) && $this->Administrador->validar_login($usuario,$pass)== TRUE) {
+
+					$session_data = $this->session->userdata('ci_session');	
+					$data['tipo'] = $session_data['tipo'];	
+
+					$this->load->helper('url');
+					$this->load->view('basic/header');
+
+					if (isset($data['tipo'])) {
+
+						if ($data['tipo'] == 'administradortotal') {
+
+							$head['usuario'] = $session_data['username'];
+							$this->load->view('basic/nav_administradortotal',$head);	
+							
+						}
+
+					}else{
+
+						$this->load->view('basic/nav');	
+
+					}
+
+					$this->load->view('basic/content');					
+					$this->load->view('basic/footer');
+				}else{
+
 				$errores[] = 'El usuario no existe en nuestra base de datos';
 				$head['errores'] = $errores;			
 				$this->load->helper('url');
@@ -377,15 +406,12 @@
 				$this->load->view('encar/login');							
 				$this->load->view('basic/footer');
 		
-
-
-
 				}
 
 			}
 			
 		}
-
+}
 		public function logout(){
 
 			$this->load->library('session');
@@ -410,6 +436,10 @@
 					$log['usuario'] = $session_data['username'];
 					$this->load->view('basic/nav_administrador',$log);
 
+				}elseif($data['tipo'] == 'administradortotal'){
+
+					$log['usuario'] = $session_data['username'];
+					$this->load->view('basic/nav_administradortotal',$log);
 				}
 
 			}else{
@@ -440,6 +470,10 @@
 					$log['usuario'] = $session_data['username'];
 					$this->load->view('basic/nav_administrador',$log);
 
+				}elseif($data['tipo'] == 'administradortotal'){
+
+					$log['usuario'] = $session_data['username'];
+					$this->load->view('basic/nav_administradortotal',$log);
 				}
 
 			}else{

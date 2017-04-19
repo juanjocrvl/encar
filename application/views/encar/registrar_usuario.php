@@ -4,19 +4,19 @@
 		<div class="form-group">
 			<label class="col-md-1"></label>
 			<div class="col-md-9">	
-			<legend>Datos usuario</legend>				
+			<legend>Datos personales</legend>				
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-md-2 col-md-offset-1" style="padding-top:8px;" >Nombres</label>
 			<div class="col-md-7">
-				<input type="text" name="nombre" class="form-control" value=<?php if (isset($codigo['codigo'])) {echo $codigo['codigo'];} ?>>
+				<input type="text" name="nombre" class="form-control" value=<?php if (isset($usuario['nombre'])) {echo $usuario['nombre'];} ?>>
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-md-2 col-md-offset-1" style="padding-top:8px;" >Apellidos</label>
 			<div class="col-md-7">
-				<input type="text" name="apellido" class="form-control" value=<?php if (isset($codigo['codigo'])) {echo $codigo['codigo'];} ?>>
+				<input type="text" name="apellido" class="form-control" value=<?php if (isset($usuario['apellido'])) {echo $usuario['apellido'];} ?>>
 			</div>
 		</div>		
 		<div class="form-group">
@@ -34,7 +34,7 @@
 			</div>
 		</div>	
 		<div class="form-group">
-			<label class="col-md-2 col-md-offset-1" style="padding-top:8px;" >Numero de documento</label>
+			<label class="col-md-2 col-md-offset-1" style="padding-top:8px;" >Número de documento</label>
 			<div class="col-md-7">
 				<input type="number" name="numeroDocumento" class="form-control" value=<?php if (isset($usuario['numeroDocumento'])) {echo $usuario['numeroDocumento'];} ?>>
 			</div>
@@ -52,7 +52,7 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-md-2 col-md-offset-1" style="padding-top:8px;" >Direccion</label>
+			<label class="col-md-2 col-md-offset-1" style="padding-top:8px;" >Dirección</label>
 			<div class="col-md-7">	
 				<input type="text" name='direccion' class="form-control" value=<?php if (isset($usuario['direccion'])) {echo $usuario['direccion'];} ?>>
 			</div>
@@ -69,6 +69,13 @@
 				<input type="text" name='celular' class="form-control" value=<?php if (isset($usuario['celular'])) {echo $usuario['celular'];} ?>>
 			</div>
 		</div>
+		<br><br>
+		<div class="form-group">
+			<label class="col-md-1"></label>
+			<div class="col-md-9">	
+			<legend>Datos de usuario</legend>				
+			</div>
+		</div>	
 		<div class="form-group">
 			<label class="col-md-2 col-md-offset-1" style="padding-top:8px;" >Usuario</label>
 			<div class="col-md-7">
@@ -95,13 +102,13 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-md-2 col-md-offset-1" style="padding-top:8px;" >Numero</label>
+			<label class="col-md-2 col-md-offset-1" style="padding-top:8px;" >Número</label>
 			<div class="col-md-7">
 				<input type="number" name='numero' class="form-control" value=<?php if (isset($tarjeta['numero'])) {echo $tarjeta['numero'];} ?>>
 			</div>
 		</div>												
 		<div class="form-group">
-			<label class="col-md-2 col-md-offset-1" style="padding-top:8px;" >Codigo de seguridad</label>
+			<label class="col-md-2 col-md-offset-1" style="padding-top:8px;" >Código de seguridad</label>
 			<div class="col-md-7">
 				<input type="text" name='codigo_seguridad' class="form-control" value=<?php if (isset($tarjeta['codigo_seguridad'])) {echo $tarjeta['codigo_seguridad'];} ?>>
 			</div>

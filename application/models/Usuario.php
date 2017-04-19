@@ -115,11 +115,11 @@ class Usuario extends CI_Model {
 		}
 
 		if ($this->contrasena == null) {
-			$errores[] = 'La contrasena no puede ser vacía';
+			$errores[] = 'La contraseña no puede ser vacía';
 		}
 
 		if ($this->contrasena2 == null) {
-			$errores[] = 'La contrasena no puede ser vacía2';
+			$errores[] = 'El campo repetir contraseña no puede ser vacío';
 		}
 		if ($this->contrasena != $this->contrasena2) {
 			$errores[] = 'Las contraseñas no coinciden';
@@ -139,11 +139,15 @@ class Usuario extends CI_Model {
 		$result = $query->result();
 
 		$query2 = $this->db->get_where('usuarioadminsede', ['nombreUsuario' => $this->nombreUsuario]);
-		$result2 = $query->result();
+		$result2 = $query2->result();
 
-		if (empty($result) || empty($result2) ) {
+		$query3 = $this->db->get_where('administrador', ['nombreUsuario' => $this->nombreUsuario]);
+		$result3 = $query3->result();
+
+				
+		if (empty($result) && empty($result2) && empty($result3)) {
 			$x = 1;
-		}elseif(($this->nombreUsuario == $result[0]->nombreUsuario) || ($this->nombreUsuario == $result2[0]->nombreUsuario) ) {
+		}elseif((isset($result[0]->nombreUsuario) && $this->nombreUsuario == $result[0]->nombreUsuario) || (isset($result2[0]->nombreUsuario) && $this->nombreUsuario == $result2[0]->nombreUsuario) || (isset($result3[0]->nombreUsuario) && $this->nombreUsuario == $result3[0]->nombreUsuario)) {
 			$errores[] = 'El nombre de usuario ya existe en nuestra base de datos, escoje otro';		
 		}		
 

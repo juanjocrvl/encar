@@ -7,15 +7,15 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-md-2 col-md-offset-1" style="padding-top:8px;">Nombre</label>
+			<label class="col-md-2 col-md-offset-1" style="padding-top:8px;">Nombres</label>
 			<div class="col-md-7">
-				<input type="text" name="nombre" class="form-control"  value=<?php if (isset($codigo['codigo'])) {echo $codigo['codigo'];} ?>>
+				<input type="text" name="nombre" class="form-control"  value=<?php if (isset($admin['nombre'])) {echo $admin['nombre'];} ?>>
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-md-2 col-md-offset-1" style="padding-top:8px;">Apellido</label>
+			<label class="col-md-2 col-md-offset-1" style="padding-top:8px;">Apellidos</label>
 			<div class="col-md-7">
-				<input type="text" name="apellido" class="form-control" value=<?php if (isset($codigo['codigo'])) {echo $codigo['codigo'];} ?>>
+				<input type="text" name="apellido" class="form-control" value=<?php if (isset($admin['apellido'])) {echo $admin['apellido'];} ?>>
 			</div>
 		</div>		
 		<div class="form-group">
@@ -57,7 +57,7 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-md-2 col-md-offset-1" style="padding-top:8px;">Telefeno</label>
+			<label class="col-md-2 col-md-offset-1" style="padding-top:8px;">Teléfono</label>
 			<div class="col-md-7">
 				<input type="text" name='telefono' class="form-control" value=<?php if (isset($admin['telefono'])) {echo $admin['telefono'];} ?>>
 			</div>
