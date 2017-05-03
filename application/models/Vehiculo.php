@@ -9,6 +9,9 @@ class Vehiculo extends CI_Model {
 	private $transmision;
 	private $combustible;
 	private $color;
+	private $sede;
+	private $estado;
+
 	
 	public function __construct($value = null) {
 		parent::__construct();
@@ -16,15 +19,17 @@ class Vehiculo extends CI_Model {
 
 		if ($value != null) {
 			if (is_array($value))
-				settype($value, 'object');   //El array se vuelve objeto
+				settype($value, 'object');   
 
-			if (is_object($value)) {       //pregunta si es un objeto
-				$this->categoria = isset($value->categoria)? $value->categoria : null; //isset pregunta si no está nulo. Si hay algo se asigna el valor, si no, se pone nulo.
+			if (is_object($value)) {       
+				$this->categoria = isset($value->categoria)? $value->categoria : null; 
 				$this->precio = isset($value->precio)? $value->precio : null;
 				$this->placa = isset($value->placa)? $value->placa : null;
 				$this->transmision = isset($value->transmision)? $value->transmision : null;
 				$this->combustible = isset($value->combustible)? $value->combustible : null;
 				$this->color = isset($value->color)? $value->color : null;
+				$this->sede = isset($value->sede)? $value->sede : null;		
+				$this->estado = isset($value->estado)? $value->estado : null;							
 			}
 		}
 	}
@@ -37,6 +42,8 @@ class Vehiculo extends CI_Model {
 			case 'transmision':
 			case 'combustible':
 			case 'color':
+			case 'sede':
+			case 'estado':						
 				return $this->$key;
 			default:
 				return parent::__get($key);
@@ -44,37 +51,40 @@ class Vehiculo extends CI_Model {
 	}
 
 	public function validar() {
-		$errores = [];
-		if ($this->categoria == '0') {
-			$errores[] = 'La categoria no puede ser vacía';
-		}
 
-		if ($this->precio == null) {
-			$errores[] = 'El precio no puede ser vacío';
-		}
+		$this->form_validation->set_rules('placa','Placa','required|alpha_numeric|exact_length[6]');
+		$this->form_validation->set_rules('precio','Precio','required|is_natural_no_zero');
+		$this->form_validation->set_rules('categoria','Categoria','required|callback_select_validar');	
+		$this->form_validation->set_rules('transmision','Transmision','required|callback_select_validar');
+		$this->form_validation->set_rules('combustible','Combustible','required|callback_select_validar');	
+		$this->form_validation->set_rules('color','Color','required|callback_select_validar');	
+		$this->form_validation->set_rules('sede','Sede','required|callback_select_validar');									
+		
+		if ($this->form_validation->run() === FALSE) {
 
-		if ($this->placa == null) {
-			$errores[] = 'La placa no puede ser vacía';
-		}
+			return FALSE;
 
-		if ($this->transmision == '0') {
-			$errores[] = 'La transmision no puede ser vacía';
-		}
-
-		if ($this->combustible == '0') {
-			$errores[] = 'El combustible no puede ser vacío';
-		}
-
-		if ($this->color == '0') {
-			$errores[] = 'El color no puede ser vacío';
-		}
-
-		if (empty($errores)) {
-			return TRUE;
 		} else {
-			return $errores;
+
+			return TRUE;
+
 		}
 	}
+
+	public function validar_mover() {
+
+		$this->form_validation->set_rules('sede_nueva','Sede nueva','required|callback_select_validar');
+								
+		if ($this->form_validation->run() === FALSE) {
+
+			return FALSE;
+
+		} else {
+
+			return TRUE;
+
+		}
+	}	
 
 	public function registrar() {
 		$data = [
@@ -83,7 +93,9 @@ class Vehiculo extends CI_Model {
 			'categoria' => $this->categoria,
 			'transmision' => $this->transmision,
 			'combustible' => $this->combustible,
-			'color' => $this->color
+			'color' => $this->color,
+			'sede' => $this->sede,
+			'estado' => 'Disponible'							
 		];
 
 		return $this->db->insert('vehiculo', $data);
@@ -91,66 +103,63 @@ class Vehiculo extends CI_Model {
 
 	public function actualizar() {
 		$data = [
-			'tipo_documento' => $this->tipo_documento,
-			'nombre' => $this->nombre,
-			'apellido' => $this->apellido,
-			'sexo' => $this->sexo,
-			'fecha_nacimiento' => $this->fecha_nacimiento,
-			'direccion' => $this->direccion,
-			'ciudad' => $this->ciudad,
-			'nacionalidad' => $this->nacionalidad,
-			'email' => $this->email,
-			'telefono' => $this->telefono
+			'placa' => $this->placa,
+			'precio' => $this->precio,
+			'categoria' => $this->categoria,
+			'transmision' => $this->transmision,
+			'combustible' => $this->combustible,
+			'color' => $this->color,
+			'sede' => $this->sede,
+			'estado' => 'Disponible'							
 		];
 
-		return $this->db->update('persona', $data , array('numero_documento' => $this->numero_documento));
-	}	
+		return $this->db->update('vehiculo', $data , ['placa' => $this->placa]);
+	}		
 
-	public function eliminar() {
-
-		return $this->db->delete('persona', array('numero_documento' => $this->numero_documento));
-	}
-
-	public function obtener_datos() {
-		$query = $this->db->get_where('persona', ['numero_documento' => $this->numero_documento]);
-		$result = $query->result();
-		if (empty($result)) {
-			return FALSE;
-		} else {
-			$this->tipo_documento = $result[0]->tipo_documento;
-			$this->numero_documento = $result[0]->numero_documento;
-			$this->nombre = $result[0]->nombre;
-			$this->apellido = $result[0]->apellido;
-			$this->sexo = $result[0]->sexo;
-			$this->fecha_nacimiento = $result[0]->fecha_nacimiento;
-			$this->direccion = $result[0]->direccion;
-			$this->ciudad = $result[0]->ciudad;
-			$this->nacionalidad = $result[0]->nacionalidad;
-			$this->email = $result[0]->email;
-			$this->telefono = $result[0]->telefono;
-			return $this;
-		}
-	}
-
-	
-	public function obtener_estudios() {
-		$this->load->model('Estudio');
-		
-		return $this->estudios = $this->Estudio->obtener_estudios_por_persona($this);
-	}
-	
-
-	public function obtener_todas() {
-		$query = $this->db->get('persona');
+	public function obtener_vehiculos() {
+		$query = $this->db->get('vehiculo');
 
 		$result = [];
 
-		foreach ($query->result() as $key=>$persona) {
-			$result[$key] = new Persona($persona);
+		foreach ($query->result() as $key=>$vehiculo) {
+			$result[$key] = new Vehiculo($vehiculo);
 		}
 
 		return $result;
 	}
+
+	public function obtener_vehiculos_catalogo($sede) {
+
+		if ($sede == 'Todas' || $sede == null) {
+
+			$query = $this->db->get('vehiculo');
+
+
+		}else{
+
+			$this->db->where(['sede' => $sede]);		
+			$query = $this->db->get('vehiculo');
+
+		}
+
+		$result = [];
+
+		foreach ($query->result() as $key=>$vehiculo) {
+			$result[$key] = new Vehiculo($vehiculo);
+		}
+
+		return $result;
+	}	
+
+	public function obtener_vehiculo($placa) {
+		$query = $this->db->get_where('vehiculo', ['placa' => $placa]);
+		$result = $query->result();
+		if (empty($result)) {
+			return FALSE;
+		} else {
+			return $result;
+		}
+	}	
 
 	
 }

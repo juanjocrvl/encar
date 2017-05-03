@@ -11,14 +11,15 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="/encar/index.php/encar">Inicio</a></li>                           
+            <li class="active"><a href="/encar/index.php/encar">Inicio</a></li>  
+            <li><a href="/encar/index.php/vehiculos/catalogo">Catalogo</a></li>                                      
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
               <a href="http://getbootstrap.com/examples/starter-template/#contact" class="dropdown-toggle" data-toggle="dropdown">Ingresar<span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><a href="/encar/index.php/encar/loginvista">Iniciar sesion</a></li>
-                <li><a href="/encar/index.php/encar/registrar_usuariovista">Registrarse</a></li>                
+                <li><a href="/encar/index.php/personas/login_vista">Iniciar sesion</a></li>
+                <li><a href="/encar/index.php/usuarios/registrar_vista">Registrarse</a></li>                
               </ul>
             </li>                   
           </ul>          

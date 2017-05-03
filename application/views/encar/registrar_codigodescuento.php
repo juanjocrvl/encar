@@ -1,5 +1,5 @@
 <div class="container">
-	<form action = "/encar/index.php/encar/registrar_codigodescuentomodelo" class="form-horizontal" method='post' id="usuario">
+	<form action = "/encar/index.php/codigosDescuento/registrar_modelo" class="form-horizontal" method='post' id="usuario">
 		<div class="form-group">
 			<label class="col-md-1"></label>
 			<div class="col-md-9">		
@@ -9,19 +9,22 @@
 		<div class="form-group">
 			<label class="col-md-2 col-md-offset-1" style="padding-top:8px;" >Codigo</label>
 			<div class="col-md-7">						
-				<input type="text" name="codigo" class="form-control" value=<?php if (isset($codigo['codigo'])) {echo $codigo['codigo'];} ?>>
+				<input type="text" name="codigo" class="form-control" value=<?php echo set_value('codigo'); ?>>
+				<font color="red"><?php echo form_error('codigo'); ?></font>			
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-md-2 col-md-offset-1" style="padding-top:8px;" >Fecha vencimiento</label>
 			<div class="col-md-7">
-				<input type="date" name="fecha_vencimiento" class="form-control" placeholder="dd/mm/aaaa" value=<?php if (isset($codigo['fecha_vencimiento'])) {echo $codigo['fecha_vencimiento'];} ?>>
+				<input type="date" name="fecha_vencimiento" class="form-control" placeholder="aaaa/mm/dd" value=<?php echo set_value('fecha_vencimiento'); ?>>
+				<font color="red"><?php echo form_error('fecha_vencimiento'); ?></font>					
 			</div>
 		</div>		
 		<div class="form-group">
 			<label class="col-md-2 col-md-offset-1" style="padding-top:8px;" >Patrocinador</label>
 			<div class="col-md-7">
-				<input type="text" name="patrocinador" class="form-control" value=<?php if (isset($codigo['patrocinador'])) {echo $codigo['patrocinador'];} ?>>
+				<input type="text" name="patrocinador" class="form-control" value=<?php echo set_value('patrocinador'); ?>>
+				<font color="red"><?php echo form_error('patrocinador'); ?></font>					
 			</div>
 		</div>		
 		<br><br>

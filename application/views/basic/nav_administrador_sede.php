@@ -12,8 +12,24 @@
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li class="active"><a href="/encar/index.php/encar">Inicio</a></li>
-            <li><a href="/encar/index.php/vehiculos/catalogo">Catalogo</a></li>  
-            <li><a href="/encar/index.php/encar">Reservas</a></li>                                        
+            <li><a href="/encar/index.php/vehiculos/catalogo">Catalogo</a></li>             
+            <li><a href="http://getbootstrap.com/examples/starter-template/#contact">Reservas</a></li>
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+              <a href="http://getbootstrap.com/examples/starter-template/#contact" class="dropdown-toggle" data-toggle="dropdown">Vehiculos<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/encar/index.php/encar/registrar_vehiculovista">Registrar</a></li>               
+              </ul>
+            </li>                   
+          </ul> 
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+              <a href="http://getbootstrap.com/examples/starter-template/#contact" class="dropdown-toggle" data-toggle="dropdown">Codigos de descuento<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/encar/index.php/encar/registrar_codigovista">Registrar</a></li>               
+              </ul>
+            </li>                   
+          </ul>                                                               
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
