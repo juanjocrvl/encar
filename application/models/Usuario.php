@@ -51,6 +51,30 @@ class Usuario extends Persona {
 
 	}
 
+	public function validar_saldo($usuario,$placa) {
+		
+		$this->load->model('TarjetaCredito');
+		$this->load->model('Vehiculo');
+		$saldo = $this->TarjetaCredito->obtener_saldo($usuario);
+		$precio = $this->Vehiculo->obtener_precio($placa);
+
+		if ($saldo == FALSE || $precio == FALSE) {
+			return FALSE;
+
+		}elseif ($saldo < $precio) {
+			return FALSE;
+		
+		}else{
+
+			$resta = $saldo - $precio;
+			$this->TarjetaCredito->actualizar_saldo($usuario,$resta);
+			return TRUE;
+
+		}
+
+
+	}	
+
 	public function registrar() {
 
 		$this->db->trans_begin();

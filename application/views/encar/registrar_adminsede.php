@@ -37,14 +37,14 @@
 		<div class="form-group">
 			<label class="col-md-2 col-md-offset-1" style="padding-top:8px;">Numero de documento</label>
 			<div class="col-md-7">
-				<input type="text" name="numeroDocumento" class="form-control" placeholder="aaaa/mm/dd" value=<?php echo set_value('numeroDocumento'); ?>>
+				<input type="text" name="numeroDocumento" class="form-control" value=<?php echo set_value('numeroDocumento'); ?>>
 				<font color="red"><?php echo form_error('numeroDocumento'); ?></font>	
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-md-2 col-md-offset-1" style="padding-top:8px;">Fecha de nacimiento</label>
 			<div class="col-md-7">
-				<input type="date" name='fechaNacimiento' class="form-control" value=<?php echo set_value('fechaNacimiento'); ?>>
+				<input type="date" name='fechaNacimiento' placeholder="aaaa/mm/dd" class="form-control" value=<?php echo set_value('fechaNacimiento'); ?>>
 				<font color="red"><?php echo form_error('fechaNacimiento'); ?></font>	
 			</div>
 		</div>	
@@ -76,6 +76,20 @@
 				<font color="red"><?php echo form_error('celular'); ?></font>	
 			</div>
 		</div>
+		<div class="form-group">
+			<label class="col-md-2 col-md-offset-1" style="padding-top:8px;" >Sede</label>
+			<div class="col-md-7">	
+				<select class="form-control" name="sede">
+					<option selected value="0"> Elige una opción </option>
+					<?php 	if(!empty($sedes)) {
+								foreach ($sedes as $sedes) { ?>
+   									<option value=<?= $sedes->nombre ?> <?php echo set_select('sede',$sedes->nombre); ?>><?= $sedes->nombre ?></option>
+					<?php		}	
+							}?>
+				</select>
+				<font color="red"><?php echo form_error('sede'); ?></font>				
+			</div>
+		</div>	
 		<div class="form-group">
 			<label class="col-md-2 col-md-offset-1" style="padding-top:8px;">Usuario</label>
 			<div class="col-md-7">

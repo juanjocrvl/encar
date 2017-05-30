@@ -28,7 +28,7 @@
 				$codigo = new Sede($data);								
 				$codigo->registrar();
 			
-				$head['success'] = 'Codigo de descuento registrado correctamente';	
+				$head['success'] = 'Sede registrada correctamente';	
 				$head['link'] = '/encar/index.php/sedes/registrar_vista';	
 				$head['boton'] = 'Registrar nueva sede';	
 

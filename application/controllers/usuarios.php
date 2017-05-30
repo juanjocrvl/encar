@@ -52,8 +52,6 @@
 				$usuario->registrar();		
 					
 				$head['success'] = 'Usuario registrado correctamente';		
-				$head['link'] = '/encar/index.php/usuarios/registrar_vista';
-				$head['boton'] = 'usuario';	
 
 				$this->load->view('basic/header',$head);
 				$this->barra_nav();
@@ -99,8 +97,19 @@
 
 			} else {
 
-				$this->form_validation->set_message('validarFecha','Fecha incorrecta.');			
-				return FALSE;
+				$format = 'Y-m-d';
+			    $fecha = DateTime::createFromFormat($format, $date);
+			    
+				if ($fecha && $fecha->format($format) == $date) {
+
+					return TRUE;
+
+				} else {
+
+					$this->form_validation->set_message('validarFecha','Fecha incorrecta.');		
+					return FALSE;
+
+				}	
 
 			}		    
 

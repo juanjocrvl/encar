@@ -29,10 +29,10 @@
 					$log['usuario'] = $session_data['username'];
 					$this->load->view('basic/nav_administrador',$log);
 
-				}elseif($data['tipo'] == 'administradortotal'){
+				}elseif($data['tipo'] == 'administradorsede'){
 
 					$log['usuario'] = $session_data['username'];
-					$this->load->view('basic/nav_administradortotal',$log);
+					$this->load->view('basic/nav_administrador_sede',$log);
 				}
 
 			}else{

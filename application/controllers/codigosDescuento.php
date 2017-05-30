@@ -1,5 +1,5 @@
 <?php
-	defined('BASEPATH') OR exit('No direct script access allowed');
+	if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 	class CodigosDescuento extends CI_controller{
 
@@ -103,8 +103,19 @@
 
 			} else {
 
-				$this->form_validation->set_message('validarFecha','Fecha incorrecta.');		
-				return FALSE;
+				$format = 'Y-m-d';
+			    $fecha = DateTime::createFromFormat($format, $date);
+			    
+				if ($fecha && $fecha->format($format) == $date) {
+
+					return TRUE;
+
+				} else {
+
+					$this->form_validation->set_message('validarFecha','Fecha incorrecta.');		
+					return FALSE;
+
+				}	
 
 			}		    
 

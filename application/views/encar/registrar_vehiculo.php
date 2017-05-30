@@ -80,7 +80,6 @@
    									<option value=<?= $sedes->nombre ?> <?php echo set_select('sede',$sedes->nombre); ?>><?= $sedes->nombre ?></option>
 					<?php		}	
 							}?>
-
 				</select>
 				<font color="red"><?php echo form_error('sede'); ?></font>				
 			</div>

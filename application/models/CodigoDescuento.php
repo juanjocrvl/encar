@@ -73,5 +73,18 @@ class CodigoDescuento extends CI_Model {
 
 		return $result;
 	}
+
+	public function validarCodigo($codigo) {
+
+		$query = $this->db->get_where('codigo_descuento', ['codigo' => $codigo]);
+		$result = $query->result();
+
+		if (empty($result)) {
+			return FALSE;
+		} else {
+			return TRUE;
+		}
+
+	}	
 	
 }

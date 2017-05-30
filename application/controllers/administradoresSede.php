@@ -5,7 +5,9 @@
 
 		public function registrar_vista(){
 
-			$this->load->view('basic/header');
+			$this->load->model('Sede');	
+			$lista['sedes'] = $this->Sede->obtener_sedes();
+			$this->load->view('basic/header',$lista);
 			$this->barra_nav();
 			$this->load->view('basic/content');	
 			$this->load->view('encar/registrar_adminsede');			
@@ -30,6 +32,7 @@
 							  'direccion' => $this->input->post('direccion'),
 							  'telefono' => $this->input->post('telefono'),
 							  'celular' => $this->input->post('celular'),
+							  'sede' => $this->input->post('sede'),							  
 							  'nombreUsuario' => $this->input->post('nombreUsuario'),
 							  'contrasena' => $this->input->post('contrasena'),
 							  'contrasena2' => $this->input->post('contrasena2')
@@ -38,9 +41,7 @@
 				$administrador_sede = new AdministradorSede($data,2);
 				$administrador_sede->registrar();
 			
-				$head['success'] = 'Administrador registrado correctamente';		
-				$head['link'] = '/encar/index.php/AdministradoresSede/registrar_vista';
-				$head['boton'] = 'administrador sede';	
+				$head['success'] = 'Administrador de sede registrado correctamente';		
 
 				$this->load->view('basic/header',$head);
 				$this->barra_nav();
@@ -104,7 +105,36 @@
 
 			}
 
-		}							
+		}
+
+		function validarFecha($date){
+
+			$format = 'Y/m/d';
+		    $fecha = DateTime::createFromFormat($format, $date);
+
+			if ($fecha && $fecha->format($format) == $date) {
+
+				return TRUE;
+
+			} else {
+
+				$format = 'Y-m-d';
+			    $fecha = DateTime::createFromFormat($format, $date);
+			    
+				if ($fecha && $fecha->format($format) == $date) {
+
+					return TRUE;
+
+				} else {
+
+					$this->form_validation->set_message('validarFecha','Fecha incorrecta.');		
+					return FALSE;
+
+				}	
+
+			}		    
+
+		}									
 																			
 	}
 ?>

@@ -71,8 +71,8 @@ class Persona extends CI_Model {
 
 	public function validar() {
 
-		$this->form_validation->set_rules('nombre','Nombre','required|alpha');
-		$this->form_validation->set_rules('apellido','Apellido','required|alpha');
+		$this->form_validation->set_rules('nombre','Nombre','required');
+		$this->form_validation->set_rules('apellido','Apellido','required');
 		$this->form_validation->set_rules('tipoDocumento','Tipo de documento','required|callback_select_validar');	
 		$this->form_validation->set_rules('numeroDocumento','Numero de documento','required|is_natural_no_zero');
 		$this->form_validation->set_rules('fechaNacimiento','Fecha de nacimiento','required|callback_validarFecha');	
@@ -134,7 +134,8 @@ class Persona extends CI_Model {
 
 				$data = array('username' => $this->input->post('nombreUsuario'),
 							  'tipo' => $result[0]->tipoUsuario,
-							  'is_logged_in' => TRUE,
+							  'documento' => $result[0]->numeroDocumento,
+							  'is_logged_in' => TRUE
 						);
 
 				$this->session->set_userdata('ci_session',$data);

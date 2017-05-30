@@ -24,7 +24,7 @@ class Vehiculo extends CI_Model {
 			if (is_object($value)) {       
 				$this->categoria = isset($value->categoria)? $value->categoria : null; 
 				$this->precio = isset($value->precio)? $value->precio : null;
-				$this->placa = isset($value->placa)? $value->placa : null;
+				$this->placa = isset($value->placa)? strtoupper($value->placa) : null;
 				$this->transmision = isset($value->transmision)? $value->transmision : null;
 				$this->combustible = isset($value->combustible)? $value->combustible : null;
 				$this->color = isset($value->color)? $value->color : null;
@@ -132,11 +132,13 @@ class Vehiculo extends CI_Model {
 
 		if ($sede == 'Todas' || $sede == null) {
 
+			$this->db->where(['estado' => 'Disponible']);
 			$query = $this->db->get('vehiculo');
 
 
 		}else{
 
+			$this->db->where(['estado' => 'Disponible']);
 			$this->db->where(['sede' => $sede]);		
 			$query = $this->db->get('vehiculo');
 
@@ -159,7 +161,33 @@ class Vehiculo extends CI_Model {
 		} else {
 			return $result;
 		}
-	}	
+	}
 
+	public function obtener_precio($placa) {
+
+		$query = $this->db->get_where('vehiculo', ['placa' => $placa]);
+		$result = $query->result();
+		if (empty($result)) {
+			return FALSE;
+		} else {
+
+			return $result[0]->precio;
+		}
+
+	}
+
+	public function cambiarEstado($placa,$estado) {
+
+		$this->db->update('vehiculo', array('estado' => $estado) , array('placa' => $placa));
+
+
+	}
+
+	public function actualizarSede($placa,$sede) {
+
+		$this->db->update('vehiculo', array('sede' => $sede) , array('placa' => $placa));
+
+
+	}				
 	
 }

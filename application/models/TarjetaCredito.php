@@ -37,7 +37,7 @@ class TarjetaCredito extends CI_Model {
 	public function validar() {
 
 		$this->form_validation->set_rules('numero_tarjeta','Numero','required|is_natural_no_zero');
-		$this->form_validation->set_rules('codigo_seguridad','Codigo de seguridad','required|exact_length[4]|is_natural_no_zero|');
+		$this->form_validation->set_rules('codigo_seguridad','Codigo de seguridad','required|exact_length[4]|is_natural_no_zero');
 		$this->form_validation->set_rules('fecha_vencimiento','Fecha de vencimiento','required|callback_validarFecha');	
 		$this->form_validation->set_rules('saldo','Saldo','required|is_natural_no_zero');
 
@@ -58,4 +58,25 @@ class TarjetaCredito extends CI_Model {
 			return FALSE;
 		}
 	}
+
+	public function obtener_saldo($usuario) {
+
+		$query = $this->db->get_where('tarjeta_credito', ['usuario' => $usuario]);
+		$result = $query->result();
+		if (empty($result)) {
+			return FALSE;
+		} else {
+
+			return $result[0]->saldo;
+		}
+
+	}
+
+	public function actualizar_saldo($usuario,$saldo) {
+
+		$this->db->update('tarjeta_credito', array('saldo' => $saldo) , array('usuario' => $usuario));
+
+
+	}	
+
 }
